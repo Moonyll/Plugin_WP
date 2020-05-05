@@ -13,13 +13,13 @@
         // Recall option page name => wp page name = configuration :
         do_settings_sections('configuration'); ?>
         
-        <!--Label for google analytics tracking id--> 
+        <!--Label for google analytics tracking Id--> 
         <label>Tracking Id (ID de suivi) : </label>
         
-        <!--Input for google analytics tracking id--> 
+        <!--Input for google analytics tracking Id--> 
         <input type="text" id="google_analytics" name="google_analytics" value="<?= get_option('google_analytics','UA-00000000-0'); ?>"/>
         
-        <!--wp submit button to save tracking id--> 
+        <!--wp submit button to save tracking Id--> 
         <?php submit_button('Save Tracking Id'); ?>
     </form>
 </div>
