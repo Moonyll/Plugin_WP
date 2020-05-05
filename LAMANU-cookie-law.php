@@ -65,13 +65,20 @@ function LAMANU_scripts() {?>
 /* 1.2.LAMANU_settings_tab function => display the settings tab : */
 function LAMANU_settings_tab()
 {
-    /* Add setting tab : */
+    // Variables initialization :
+    $menuPage_TabName = 'Cookies Settings Page';
+    $menuPage_PageName ='Cookies Settings';
+    $menuPage_Options = 'manage_options';
+    $menuPage_ConfigName = 'configuration';
+    $menuPage_Function = 'LAMANU_load_settings_page';
+    
+    // Add settings tab :
     add_menu_page(
-                    'Cookies Settings Page',        /* Page browser title tab */
-                    'Cookies Settings',             /* Page name */
-                    'manage_options',               /* Options management */
-                    'configuration',                /* wp configuration name */
-                    'LAMANU_load_settings_page'     /* Function to load */
+                    $menuPage_TabName,        /* Page browser title tab */
+                    $menuPage_PageName,       /* Page name */
+                    $menuPage_Options,        /* Options management */
+                    $menuPage_ConfigName,     /* wp configuration name */
+                    $menuPage_Function        /* Function to load */
                  );
 }
 
@@ -91,22 +98,40 @@ function LAMANU_load_settings_page()
 /* 1.4.LAMANU_register_settings function => register service from option page : */
 function LAMANU_register_settings()
 {
+    // Variables initialization :
+    $register_settings_GroupName = 'LAMANU_GoogleAnalytics';
+    $register_settings_IdName = 'google_analytics';
+    
     // Register Tracking Id Of Google Analitycs Service :
     register_setting(
-                        'LAMANU_GoogleAnalytics',   /* Function group */
-                        'google_analytics'          /* Id reference */
+                        $register_settings_GroupName,   /* Function group */
+                        $register_settings_IdName       /* Id reference */
                     );
 }
 
 /// 2.ACTIONS FOR WORDPRESS ///
 
-/* 2.1.Add action for wp => Load all needed script */
-add_action('wp_head', 'LAMANU_scripts');
+// Wp Main Variables initialization :
+$wp_Head = 'wp_head';       /* 2.1 Wp Head */
+$wp_Admin = 'admin_menu';   /* 2.2 Wp Admin Menu */
+$wp_Init = 'admin_init';    /* 2.3 Wp Admin Init */
 
-/* 2.2.Add action for wp => Display settings tab */
-add_action( 'admin_menu', 'LAMANU_settings_tab' );
+// Wp Functions Variables initialization :
+$wp_ScriptToLoad = 'LAMANU_scripts';                    /* 2.1.Add action for wp => Load all needed script */
+$wp_SettingsTabToDisplay = 'LAMANU_settings_tab';       /* 2.2.Add action for wp => Display settings tab */
+$wp_SettingsToRegister = 'LAMANU_register_settings';    /* 2.3.Add action for wp => Register all settings */
 
-/* 2.3.Add action for wp => Register settings tab */
-add_action('admin_init', 'LAMANU_register_settings');
+// Array of variables :
+$wp_array_For_Action = array(
+
+    $wp_Head => $wp_ScriptToLoad,
+    $wp_Admin => $wp_SettingsTabToDisplay,
+    $wp_Init => $wp_SettingsToRegister);
+
+// Add action applied for array element :
+foreach ($wp_array_For_Action as $key => $value)
+{
+    add_action($key, $value);
+}
 
 ?>
