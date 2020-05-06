@@ -10,11 +10,37 @@ Author URI: https://gitlab.ecole-e2n.fr/La-Manu/Exercice-WordPress
 
 /// 1. PLUGIN LAMANU FUNCTIONS ///
 
+/* 1.0.a. Create TAC script source : */
+function ScriptTACSource()
+{
+    // Main plugin directory url :
+     $mainDirectory = plugin_dir_url(__FILE__);
+    
+    // Script directory :
+     $scriptDirectory ='js/tarteaucitron/tarteaucitron.js';
+     
+     // Set 'Tarteaucitron' script source :
+     echo $mainDirectory.$scriptDirectory;
+}
+
+/* 1.0.b. Create GGA script source : */
+function ScriptGGASource()
+{
+    // Main plugin directory url :
+     $mainDirectory = plugin_dir_url(__FILE__);
+    
+    // Script directory :
+     $scriptDirectory ='js/googleAnalytics.js';
+     
+     // Set 'Tarteaucitron' script source :
+     echo $mainDirectory.$scriptDirectory;
+}
+
 /* 1.1.LAMANU function to initialize the "tarteaucitron" script & use Google Analytics Service : */
 function LAMANU_scripts() {?>
     
     <!-- Load "Tarteaucitron" script -->
-    <script type="text/javascript" src="<?php echo plugin_dir_url(__FILE__).'js/tarteaucitron/tarteaucitron.js'; ?>">
+    <script type="text/javascript" src=" <?php ScriptTACSource(); ?>">
     </script>
 
     <!-- Tarteaucitron & Google Analytics script -->
@@ -57,7 +83,7 @@ function LAMANU_scripts() {?>
     </script>
 
     <!-- Load "googleAnalytics" script -->
-    <script type="text/javascript" src="<?php echo plugin_dir_url( __FILE__ ).'js/googleAnalytics.js'; ?>">
+    <script type="text/javascript" src="<?php ScriptGGASource() ?>">
     </script>
 
 <?php }
