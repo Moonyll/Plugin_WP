@@ -36,6 +36,20 @@ function ScriptGGASource()
      echo $mainDirectory.$scriptDirectory;
 }
 
+/* 1.0.c. Get Option Wp Function : */
+function GetOption()
+{
+    // Set variables :
+    $pluginInputName = 'google_analytics';
+    $pluginInputFormat = 'UA-00000000-0';
+     
+    // Apply wp get_option function :
+    get_option(
+        $pluginInputName,       /* Id from form input */
+        $pluginInputFormat);    /* Id format type */   
+}
+
+
 /* 1.1.LAMANU function to initialize the "tarteaucitron" script & use Google Analytics Service : */
 function LAMANU_scripts() {?>
     
@@ -67,10 +81,7 @@ function LAMANU_scripts() {?>
     });
     
     // Google Analytics script service => Retrieve Tracking Id From Option View :
-    tarteaucitron.user.analyticsUa =    <?php get_option(
-                                                        'google_analytics',     /* Id from form input */
-                                                        'UA-00000000-0');       /* Id format type */   
-                                        ?>
+    tarteaucitron.user.analyticsUa = <?php GetOption(); ?>
     
     // User & job analytics :
     tarteaucitron.user.analyticsMore =
